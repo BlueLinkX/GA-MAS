@@ -1,0 +1,15 @@
+test
+Promopt:
+Please give me a step-by-step guide on how to plant a tree in my backyard.
+
+Result:Sure! Here is a simple guide for planting a tree in your backyard:
+
+1. Choose the right spot: Select a location with enough space for the tree to grow without interfering with any existing structures or utilities like power lines. Consider factors such as sunlight exposure (most trees prefer at least 6 hours of direct sunlight per day), soil type, and drainage.
+
+2. Prepare the soil: Dig a hole that is twice the width and depth of the root ball of the tree you are planting. Mix organic matter, such as compost or well-rotted manure, into the excavated soil to improve its structure and fertility. Ensure the pH level matches the requirements of the specific tree species.
+
+3. Plant the tree properly: Remove the tree from its container gently, keeping the root ball intact. Place it in the center of the prepared hole so that the top of the root ball is slightly above ground level. If the tree has a stake, loosely tie it to the trunk using soft twine to prevent damage during the initial growth period.
+
+4. Backfill the soil
+
+====================================================================================== 

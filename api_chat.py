@@ -1,19 +1,39 @@
 import json
+
 import requests
 import os
+import time
+import re
 
 # For local streaming, the websockets are hosted without ssl - http://
 HOST = '133.9.14.117:2500'
-URI = f'http://{HOST}/api/v1/generate'
+URI = f'http://{HOST}/api/v1/chat'
 
 # For reverse-proxied streaming, the remote will likely host with ssl - https://
 # URI = 'https://your-uri-here.trycloudflare.com/api/v1/chat'
 
-def run(name,prompt,log_dir):
+
+def run(name,prompt, history,log_dir):
     request = {
-        'prompt': prompt,
-        'max_new_tokens': 1000,
-        'auto_max_new_tokens': True,
+        'user_input': prompt,
+        'max_new_tokens': 250,
+        'auto_max_new_tokens': False,
+        'history': history,
+        'mode': 'instruct',  # Valid options: 'chat', 'chat-instruct', 'instruct'
+        'character': 'Example',
+        'instruction_template': 'Vicuna-v1.1',  # Will get autodetected if unset
+        'your_name': 'You',
+        # 'name1': 'name of user', # Optional
+        # 'name2': 'name of character', # Optional
+        # 'context': 'character context', # Optional
+        # 'greeting': 'greeting', # Optional
+        # 'name1_instruct': 'You', # Optional
+        # 'name2_instruct': 'Assistant', # Optional
+        # 'context_instruct': 'context_instruct', # Optional
+        # 'turn_template': 'turn_template', # Optional
+        'regenerate': False,
+        '_continue': False,
+        'chat_instruct_command': 'Continue the chat dialogue below. Write a single reply for the character "<|character|>".\n\n<|prompt|>',
 
         # Generation params. If 'preset' is set to different than 'None', the values
         # in presets/preset-name.yaml are used instead of the individual numbers.
@@ -51,15 +71,29 @@ def run(name,prompt,log_dir):
 
     response = requests.post(URI, json=request).json()
 
-    result = response['results'][0]['text']
+    result = response['results'][0]['history']['internal'][-1][1]
+    history=response['results'][0]['history']
+    # 使用正则表达式找到第一个非\n字符之前的所有字符
+    match = re.search(r'^[\n]*', json.dumps(result, indent=4))
+    # 如果找到匹配，替换它
+    if match:
+        result = result[match.end():]
+
     #print(prompt + result)
     output_text = name+"\nPromopt:\n"+prompt + "\n\nResult:"+result+"\n\n====================================================================================== "
     with open(os.path.join(log_dir, "api_log.txt"), "a", encoding="utf-8") as file:
         file.write(output_text+"\n")
-    return result
+    return result, history
     
 
-
 if __name__ == '__main__':
-    prompt = "In order to make homemade bread, follow these steps:\n1)"
-    run(prompt)
+    user_input = "Please give me a step-by-step guide on how to plant a tree in my backyard."
+
+    # Basic example
+    history = {'internal': [], 'visible': []}
+
+    # "Continue" example. Make sure to set '_continue' to True above
+    # arr = [user_input, 'Surely, here is']
+    # history = {'internal': [arr], 'visible': [arr]}
+
+    run('test',user_input, history,log_dir='./log/test/')
