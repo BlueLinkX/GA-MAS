@@ -16,7 +16,7 @@ URI = f'http://{HOST}/api/v1/chat'
 def run(name,prompt, history,log_dir):
     request = {
         'user_input': prompt,
-        'max_new_tokens': 250,
+        'max_new_tokens': 500,
         'auto_max_new_tokens': False,
         'history': history,
         'mode': 'instruct',  # Valid options: 'chat', 'chat-instruct', 'instruct'
@@ -39,15 +39,15 @@ def run(name,prompt, history,log_dir):
         # in presets/preset-name.yaml are used instead of the individual numbers.
         'preset': 'None',
         'do_sample': True,
-        'temperature': 0.1,
+        'temperature': 0.7,
         'top_p': 0.1,
-        'typical_p': 1,
+        'typical_p': 0.5,
         'epsilon_cutoff': 0,  # In units of 1e-4
         'eta_cutoff': 0,  # In units of 1e-4
         'tfs': 1,
         'top_a': 0,
         'repetition_penalty': 1.18,
-        'repetition_penalty_range': 0,
+        'repetition_penalty_range': 0.5,
         'top_k': 40,
         'min_length': 0,
         'no_repeat_ngram_size': 0,
