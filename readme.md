@@ -6,9 +6,9 @@ Social media platforms such as Twitter, Reddit, and Sina Weibo play a crucial ro
 This paper proposes a multi-agent simulation framework using Large Language Models (LLMs) to explore the evolution of user language in regulated social media environments. The framework employs LLM-driven agents: supervisory agent who enforce dialogue supervision and participant agents who evolve their language strategies while engaging in conversation, simulating the evolution of communication styles under strict regulations aimed at evading social media regulation. The study evaluates the framework's effectiveness through a range of scenarios from abstract scenarios to real-world situations. Key findings indicate that LLMs are capable of simulating nuanced language dynamics and interactions in constrained settings, showing improvement in both evading supervision and information accuracy as evolution progresses. Furthermore, it was found that LLM agents adopt different strategies for different scenarios.
 
 ### Requirements:
-Tested in Python 3.9.17 (pretty much any version of Python 3 should work)
-openai
-python-dotenv
+- Tested in Python 3.9.17 (pretty much any version of Python 3 should work)
+- openai
+- python-dotenv
 
 ### Configuration
 Before starting, fill in your ChatGPT API key in the .env file.
